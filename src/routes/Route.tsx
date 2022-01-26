@@ -1,12 +1,12 @@
 import React from 'react'
-import Login from '../pages/Login'
 import {Route, Routes} from "react-router-dom";
-import Registration from "../pages/Registration";
-import Profile from "../pages/Profile";
-import PasswordRecovery from "../pages/PasswordRecovery";
-import EnterNewPassword from "../pages/EnterNewPassword";
-import Error404 from "../pages/error/Error404";
-import TestPage from "../pages/testPage/TestPage";
+import Login from '../pages/login/Login';
+import Registration from '../pages/registration/Registration';
+import Profile from "../pages/profile/Profile";
+import Error404 from '../pages/error/Error404';
+import PasswordRecovery from "../pages/passwordRecovery/PasswordRecovery";
+import EnterNewPassword from "../pages/enterNewPassword/EnterNewPassword";
+import TestPage from '../pages/testPage/TestPage';
 
 export const PATH = {
     LOGIN: '/login',
@@ -16,8 +16,6 @@ export const PATH = {
     PASSWORD_RECOVERY: '/password-recovery',
     ENTER_NEW_PASSWORD: '/enter-new-password',
     TEST_PAGE: '/test-page'
-
-
 }
 
 export  const AppRoutes = () =>{

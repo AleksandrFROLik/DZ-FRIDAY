@@ -23,7 +23,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "homepage": " https://AleksandrFROLik.github.io/DZ-FRIDAY",
+    "homepage": "https://AleksandrFROLik.github.io/dz_friday",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

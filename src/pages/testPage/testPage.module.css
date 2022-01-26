@@ -1,0 +1,10 @@
+.testPage {
+    margin: 50px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.testPage * {
+    margin: 5px 0;
+}

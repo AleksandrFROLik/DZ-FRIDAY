@@ -5,8 +5,8 @@ import Registration from "../pages/Registration";
 import Profile from "../pages/Profile";
 import PasswordRecovery from "../pages/PasswordRecovery";
 import EnterNewPassword from "../pages/EnterNewPassword";
-import TestPage from "../pages/TestPage";
 import Error404 from "../pages/error/Error404";
+import TestPage from "../pages/testPage/TestPage";
 
 export const PATH = {
     LOGIN: '/login',

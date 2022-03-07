@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter} from "react-router-dom";
 import {AppRoutes} from "./routes/Route";
 import Navbar from './pages/navbar/NavBar';
 
 function App() {
     return (
-        <BrowserRouter>
+        <div className='.App'>
             <Navbar/>
             <AppRoutes/>
-        </BrowserRouter>
+        </div>
     );
 }
 export default App;

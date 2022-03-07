@@ -23,7 +23,7 @@ export  const AppRoutes = () =>{
         <Routes>
             <Route  path={PATH.LOGIN}  element={<Login/>}/>
             <Route path={PATH.REGISTRATION}  element={<Registration/>}/>
-            <Route path={PATH.PROFILE}  element={<Profile/>}/>
+            <Route path={'/'}  element={<Profile/>}/>
             <Route path={PATH.ERROR}  element={<Error404/>}/>
             <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
             <Route path={PATH.ENTER_NEW_PASSWORD} element={<EnterNewPassword/>}/>

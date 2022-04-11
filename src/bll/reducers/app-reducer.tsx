@@ -43,7 +43,6 @@ export const setAppErrorAC = (error: string | null) => {
     return {type: 'APP/SET-ERROR', error} as const
 }
 
-
 export const appInitializeTC = () => (dispatch: Dispatch) => {
     dispatch(toggleIsFetchingAC(true))
     authApi.authMe()

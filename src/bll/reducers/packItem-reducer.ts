@@ -1,18 +1,18 @@
 import {ActionType} from "../action-dispatchTypes";
 import {Dispatch} from "redux";
-import {packItemApi} from "../../dal/api/packItem-api";
+import {packItemApi} from "dal/api/packItem-api";
 
 
 export type PackItemType = {
-    answer: string
-    question: string
-    cardsPack_id: string
-    grade: number
-    shots: number
-    user_id: string
-    created: string
-    updated: string
-    _id: string
+    answer: string,
+    question: string,
+    cardsPack_id: string,
+    grade: number,
+    shots: number,
+    user_id: string,
+    created: string,
+    updated: string,
+    _id: string,
 }
 
 export type PackItemResponseType = {

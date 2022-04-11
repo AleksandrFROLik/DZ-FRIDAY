@@ -1,10 +1,10 @@
-import React from "react";
+import {FC, memo} from "react";
 
-import s from '../TablePackItem/TablePackItem.module.scss'
+import s from "../TablePackItem/TablePackItem.module.scss"
 import RefactorMyCard from "../TablePackItem/RefactorMyCard/refactorMyCard";
 
-import {useAppSelector} from "../../../../bll/store";
-import { selectorMyUserId } from "../../../../bll/selectors/selectors";
+import {useAppSelector} from "bll/store";
+import { selectorMyUserId } from "bll/selectors/selectors";
 
 
 type CardType = {
@@ -13,13 +13,13 @@ type CardType = {
     question: string
     answer: string
     updated: string,
-    create: string
+    create: string,
     grade: number,
 }
 
-const Card = ({id, userId, question, answer, updated, create, grade}: CardType) => {
-
-    const myUserID = useAppSelector(selectorMyUserId)
+const Card: FC<CardType> = memo(({id, userId, question, answer, updated, create, grade}) => {
+    console.log('render Card')
+    const myUserId = useAppSelector(selectorMyUserId)
 
     return (
         <div className={s.pack}>
@@ -28,9 +28,9 @@ const Card = ({id, userId, question, answer, updated, create, grade}: CardType) 
             <p className={s.pack_block_update}>{updated}</p>
             <p className={s.pack_block_createdBy}>{create}</p>
             <p className={s.pack_block_grade}>{grade}</p>
-            {userId === myUserID && <p className={s.pack_block_action}>
+            {userId === myUserId && <p className={s.pack_block_action}>
                 <RefactorMyCard _id={id} newQuestion={question} newAnswer={answer}/></p>}
         </div>
     )
-}
-export default React.memo(Card)
+})
+export default Card

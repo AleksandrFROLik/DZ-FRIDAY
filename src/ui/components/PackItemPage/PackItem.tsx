@@ -14,7 +14,7 @@ import {
 import {setActiveModalCardAC} from "bll/reducers/modalCard-reducer";
 import {addNewCardTC, deleteCardTC, sortCardsType, updateCardTC} from "bll/reducers/myCard-reducer";
 import {useAppSelector} from "bll/store";
-import { selectorModalCard, selectorMyUserId } from 'bll/selectors/selectors';
+import { selectorMyUserId} from 'bll/selectors/selectors';
 
 import s from "../PacksListPage/PacksListPage.module.scss";
 
@@ -37,22 +37,26 @@ const PackItem = () => {
     const arrayNumbers = [4, 5, 6, 7, 8, 9, 10]
 
     const packItem = useAppSelector<PackItemResponseType>(state => state.packItem)
+    const minGrade = useAppSelector<number>(state => state.packItem.minGrade)
+    const maxGrade = useAppSelector<number>(state => state.packItem.maxGrade)
     const cards = useAppSelector<PackItemType[]>(state => state.packItem.cards)
     const pageCount = useAppSelector<number>(state => state.packItem.pageCount)
     const page = useAppSelector<number>(state => state.packItem.page)
-    const myUserID = useAppSelector(selectorMyUserId)
-    const modalCard = useAppSelector(selectorModalCard)
+    const myUserId = useAppSelector(selectorMyUserId)
+    const question = useAppSelector<string>(state => state.modalCard.question)
+    const cardId = useAppSelector<string>(state => state.modalCard.cardId)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {id} = useParams()
     
     const [sortCards, setSortCards] = useState<sortCardsType>('')
+    console.log('sortCards:', sortCards)
     const search = useInput('', [])
 
     const searchDebounce = useDebounce(search.value, 1500)
-    const minGradeDebounce = useDebounce(packItem.minGrade, 1000)
-    const maxGradeDebounce = useDebounce(packItem.maxGrade, 1000)
+    const minGradeDebounce = useDebounce(minGrade, 1000)
+    const maxGradeDebounce = useDebounce(maxGrade, 1000)
 
     const NO_CARDS = cards.length === 0
     const MAX_RANGE_COUNT = 6
@@ -61,15 +65,18 @@ const PackItem = () => {
     const START_CARDS_COUNT = 4
 
     useEffect(() => {
+        console.log('useEffect')
         dispatch(getPackItemTC(id,
             page,
             pageCount,
-            packItem.minGrade,
-            packItem.maxGrade,
+            minGrade,
+            maxGrade,
+            String(searchDebounce),
             String(searchDebounce),
             sortCards))
 
-    }, [page, pageCount, minGradeDebounce, maxGradeDebounce, searchDebounce, sortCards, dispatch, id, modalCard.question])
+    }, [page, pageCount, minGradeDebounce, maxGradeDebounce, searchDebounce, sortCards, dispatch, id, question,minGrade,
+        maxGrade,])
 
     const setValuesOnSlider = (value: number[]) => {
         dispatch(setMaxMinGradeAC(value[0], value[1]))
@@ -89,12 +96,12 @@ const PackItem = () => {
     };
 
     const deleteCard = () => {
-        dispatch(deleteCardTC(id, modalCard.cardId))
+        dispatch(deleteCardTC(id, cardId))
     };
 
     const updateCard = useCallback((cardId: string, newQuestion: string, newAnswer: string) => {
         dispatch(updateCardTC(id, newQuestion, newAnswer, cardId))
-    }, [modalCard.packId, id, dispatch]);
+    }, [id, dispatch]);
 
     const handleBackToPackList = () => {
         dispatch(setMaxMinGradeAC(MIN_RANGE_COUNT, MAX_RANGE_COUNT))
@@ -113,7 +120,7 @@ const PackItem = () => {
                                  onClick={handleBackToPackList}>
                         Back to Pack List
                     </SuperButton>
-                    {myUserID === packItem.packUserId &&
+                    {myUserId === packItem.packUserId &&
                     <SuperButton className={s.doubleButton}
                                  onClick={() => dispatch(setActiveModalCardAC('addPack'))}>
                         Add New Card
@@ -122,16 +129,16 @@ const PackItem = () => {
                     <section className={s.show_packs_cards}>
                         <h6>Grade of cards</h6>
                         <div className={s.superRange_span_block}>
-                            <span className={s.span}>{packItem.minGrade}</span>
+                            <span className={s.span}>{minGrade}</span>
                             <div className={s.superRange}>
                                 <SuperDoubleRange
                                     onChangeRange={setValuesOnSlider}
-                                    value={[packItem.minGrade, packItem.maxGrade]}
-                                    min={packItem.minGrade}
+                                    value={[minGrade, maxGrade]}
+                                    min={minGrade}
                                     max={MAX_RANGE_COUNT}
                                 />
                             </div>
-                            <span className={s.span}>{packItem.maxGrade}</span>
+                            <span className={s.span}>{maxGrade}</span>
                         </div>
                     </section>
                 </div>
@@ -158,7 +165,7 @@ const PackItem = () => {
                     />
 
                     <Paginator totalCount={packItem.cardsTotalCount}
-                               pageSize={packItem.pageCount}
+                               pageSize={pageCount}
                                currentPage={page}
                                changeNumberPage={(num) => changeNumberPage(num)}
                                portionSize={10}

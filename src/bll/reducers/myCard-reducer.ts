@@ -1,6 +1,6 @@
 import {ActionType} from "../action-dispatchTypes";
 import {getPackItemTC, PackItemType} from "./packItem-reducer";
-import {packItemApi} from "../../dal/api/packItem-api";
+import {packItemApi} from "dal/api/packItem-api";
 import {AppRootStateType} from "../store";
 import {ThunkAction} from "redux-thunk";
 import {toggleIsFetchingAC} from "./app-reducer";

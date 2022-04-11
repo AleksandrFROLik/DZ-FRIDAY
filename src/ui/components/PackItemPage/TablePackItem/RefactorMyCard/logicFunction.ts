@@ -1,11 +1,11 @@
-import {sortCardsType} from "../../../../../bll/reducers/myCard-reducer";
+import {sortCardsType} from "bll/reducers/myCard-reducer";
 
-export const logicFunction = (sortCards:sortCardsType, setSortCards: (sortCards: sortCardsType) => void, app:sortCardsType, down:sortCardsType) => {
-    if (sortCards !== app && sortCards !== down) {
-        setSortCards(app)
-    } else if (sortCards === app) {
+export const logicFunction = (sortCards:sortCardsType, setSortCards: (sortCards: sortCardsType) => void, up:sortCardsType, down:sortCardsType) => {
+    if (sortCards !== up && sortCards !== down) {
+        setSortCards(up)
+    } else if (sortCards === up) {
         setSortCards(down)
     } else {
-        setSortCards(app)
+        setSortCards(up)
     }
-}
+};

@@ -1,7 +1,7 @@
 import {ActionType} from "../action-dispatchTypes";
 import {Dispatch} from "redux";
-import {authApi} from "../../dal/api/auth-api";
 import {authMeAC} from "./auth-reducer";
+import {authApi} from "dal/api/auth-api";
 
 
 type StateType = {
@@ -31,24 +31,16 @@ export const appReducer = (state: StateType = initialState, action: ActionType):
 
 export const toggleIsFetchingAC = (isFetching: boolean) => {
     return {
-        type: "APP/TOGGLE-IS-FETCHING",
-        isFetching
-    } as const
+        type: "APP/TOGGLE-IS-FETCHING", isFetching} as const
 }
 
 export const setAppInitializeAC = (value: boolean) => {
-    return {
-        type: 'APP/SET-INITIALIZE',
-        value
-    } as const
+    return {type: 'APP/SET-INITIALIZE', value} as const
 }
 
 
 export const setAppErrorAC = (error: string | null) => {
-    return {
-        type: 'APP/SET-ERROR',
-        error
-    } as const
+    return {type: 'APP/SET-ERROR', error} as const
 }
 
 

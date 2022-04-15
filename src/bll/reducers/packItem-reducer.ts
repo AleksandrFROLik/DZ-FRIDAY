@@ -1,6 +1,7 @@
 import {ActionType} from "../action-dispatchTypes";
 import {Dispatch} from "redux";
 import {packItemApi} from "dal/api/packItem-api";
+import { toggleIsFetchingAC} from "bll/reducers/app-reducer";
 
 
 export type PackItemType = {
@@ -123,7 +124,7 @@ export const getPackItemTC = (cardsPack_id: string | undefined,
                               cardAnswer?: string,
                               cardQuestion?: string,
                               sortCards?: string) => (dispatch: Dispatch) => {
-    // dispatch(toggleIsFetchingAC(true))
+    dispatch(toggleIsFetchingAC(true))
     packItemApi.getCards(cardsPack_id, page, pageCount, min, max, cardAnswer, cardQuestion, sortCards)
         .then(res => {
             dispatch(getPackItemAC(res.data.cards, res.data.cardsTotalCount, res.data.maxGrade, res.data.packUserId))
@@ -131,23 +132,22 @@ export const getPackItemTC = (cardsPack_id: string | undefined,
         .catch(() => {
 
         })
-    // .finally(() => {
-    //     dispatch(toggleIsFetchingAC(false))
-    // })
+        .finally(() => {
+            dispatch(toggleIsFetchingAC(false))
+        })
 }
 
-export const setCardsGradeTC = (grade: number, card_id: string) => async (dispatch: Dispatch) => {
-    // dispatch(toggleIsFetchingAC(true))
+export const setCardsGradeTC = (grade: number, card_id: string) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetchingAC(true))
     packItemApi.cardsGrade(grade, card_id)
-        .then(res => {
+        .then(() => {
             dispatch(setCardsGradeAC(grade, card_id))
-
         })
         .catch(() => {
 
         })
-    // .finally(() => {
-    //     dispatch(toggleIsFetchingAC(false))
-    // })
+        .finally(() => {
+            dispatch(toggleIsFetchingAC(false))
+        })
 }
 

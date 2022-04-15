@@ -1,7 +1,6 @@
 import {ActionType, DispatchType} from "../action-dispatchTypes";
-import {packsApi} from "../../dal/api/packs-api";
-import {sortPacksType} from "../../ui/components/PacksListPage/PacksListPageContainer";
-
+import {packsApi} from "dal/api/packs-api";
+import {sortPacksType} from "ui/components/PacksListPage/PacksListPageContainer";
 
 export type WhosePackType = 'myPack' | 'allPack'
 
@@ -17,11 +16,11 @@ export type PackResponseType = {
 
 export type PacksReducerType = {
     cardPacks: PackResponseType []
-    cardPacksTotalCount: number// количество колод
+    cardPacksTotalCount: number
     startMaxCount: number
     maxCardsCount: number
     minCardsCount: number
-    page: number// выбранная страница
+    page: number
     pageCount: number
     whosePack: WhosePackType
     packsPreloader: boolean

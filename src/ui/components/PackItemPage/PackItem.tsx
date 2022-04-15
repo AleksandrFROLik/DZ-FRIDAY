@@ -1,12 +1,10 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import {memo, useEffect, useLayoutEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
 
 import {
     changeNumberPageCardsAC,
     getPackItemTC,
-    PackItemResponseType,
-    PackItemType,
     setCardsCountAC,
     setMaxMinGradeAC
 } from "bll/reducers/packItem-reducer";
@@ -14,7 +12,14 @@ import {
 import {setActiveModalCardAC} from "bll/reducers/modalCard-reducer";
 import {addNewCardTC, deleteCardTC, sortCardsType, updateCardTC} from "bll/reducers/myCard-reducer";
 import {useAppSelector} from "bll/store";
-import { selectorMyUserId} from 'bll/selectors/selectors';
+import {
+    selectorCardId,
+    selectorCards, selectorFetching,
+    selectorMaxGrade,
+    selectorMinGrade,
+    selectorMyUserId,
+    selectorPackItem, selectorPage, selectorPageCount, selectorQuestion
+} from 'bll/selectors/selectors';
 
 import s from "../PacksListPage/PacksListPage.module.scss";
 
@@ -29,29 +34,31 @@ import Paginator from "../../common/Paginator/Paginator";
 import {useDebounce} from "hooks/useDebounce";
 import Search from "../PacksListPage/Search/SearchInput";
 import {useInput} from "hooks/useInput";
+import Preloader from "ui/common/Preloader/Preloader";
 
 
-
-const PackItem = () => {
+const PackItem = memo(() => {
     console.log('render PackItem')
     const arrayNumbers = [4, 5, 6, 7, 8, 9, 10]
-
-    const packItem = useAppSelector<PackItemResponseType>(state => state.packItem)
-    const minGrade = useAppSelector<number>(state => state.packItem.minGrade)
-    const maxGrade = useAppSelector<number>(state => state.packItem.maxGrade)
-    const cards = useAppSelector<PackItemType[]>(state => state.packItem.cards)
-    const pageCount = useAppSelector<number>(state => state.packItem.pageCount)
-    const page = useAppSelector<number>(state => state.packItem.page)
+    const isFetching = useAppSelector(selectorFetching)
+    const packItem = useAppSelector(selectorPackItem)
+    const minGrade = useAppSelector(selectorMinGrade)
+    const maxGrade = useAppSelector(selectorMaxGrade)
+    const cards = useAppSelector(selectorCards)
+    const pageCount = useAppSelector(selectorPageCount)
+    const page = useAppSelector(selectorPage)
     const myUserId = useAppSelector(selectorMyUserId)
-    const question = useAppSelector<string>(state => state.modalCard.question)
-    const cardId = useAppSelector<string>(state => state.modalCard.cardId)
+    const question = useAppSelector(selectorQuestion)
+    const cardId = useAppSelector(selectorCardId)
+
+
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {id} = useParams()
-    
+
     const [sortCards, setSortCards] = useState<sortCardsType>('')
-    console.log('sortCards:', sortCards)
+
     const search = useInput('', [])
 
     const searchDebounce = useDebounce(search.value, 1500)
@@ -75,8 +82,9 @@ const PackItem = () => {
             String(searchDebounce),
             sortCards))
 
-    }, [page, pageCount, minGradeDebounce, maxGradeDebounce, searchDebounce, sortCards, dispatch, id, question,minGrade,
+    }, [page, pageCount, minGradeDebounce, maxGradeDebounce, searchDebounce, sortCards, dispatch, id, question, minGrade,
         maxGrade,])
+
 
     const setValuesOnSlider = (value: number[]) => {
         dispatch(setMaxMinGradeAC(value[0], value[1]))
@@ -99,9 +107,9 @@ const PackItem = () => {
         dispatch(deleteCardTC(id, cardId))
     };
 
-    const updateCard = useCallback((cardId: string, newQuestion: string, newAnswer: string) => {
+    const updateCard = (cardId: string, newQuestion: string, newAnswer: string) => {
         dispatch(updateCardTC(id, newQuestion, newAnswer, cardId))
-    }, [id, dispatch]);
+    };
 
     const handleBackToPackList = () => {
         dispatch(setMaxMinGradeAC(MIN_RANGE_COUNT, MAX_RANGE_COUNT))
@@ -113,7 +121,7 @@ const PackItem = () => {
 
     return (
         <>
-            {/*{isFetching && <Preloader/>}*/}
+
             <div className={s.packsListPageContainer}>
                 <div className={s.leftBlock}>
                     <SuperButton className={s.doubleButton}
@@ -145,6 +153,7 @@ const PackItem = () => {
 
                 <div className={s.rightBlock}>
                     <h1>Cards</h1>
+                    <section>{isFetching && <Preloader/>}</section>
                     <Search searchOnChange={search.valueChange} searchValue={search.value}/>
                     <section className={s.table}>
                         <TablePackItem sortCards={sortCards} setSortCards={setSortCards}/>
@@ -175,6 +184,6 @@ const PackItem = () => {
             <MyModalPageCard addNewCard={addNewCard} deleteCard={deleteCard} updateCard={updateCard}/>
         </>
     );
-};
+});
 
-export default React.memo(PackItem);
+export default PackItem;

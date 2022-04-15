@@ -1,5 +1,5 @@
 import SuperButton from "../../common/c2-SuperButton/SuperButton";
-import {PackResponseType, WhosePackType,} from "../../../bll/reducers/packs-reducer";
+import {PackResponseType, WhosePackType,} from "bll/reducers/packs-reducer";
 import HeaderTable from "./Table/HeaderTable/HeaderTable";
 import SuperSelect from "../../common/SuperComponents/SuperSelect";
 import Paginator from "../../common/Paginator/Paginator";
@@ -8,7 +8,7 @@ import Search from "./Search/SearchInput";
 import SuperDoubleRange from "../../common/SuperComponents/SuperDoubleRange";
 import Ava from "../../common/Ava/Ava";
 import {sortPacksType} from "./PacksListPageContainer";
-import {addPackModalAC} from "../../../bll/reducers/modal-reducer";
+import {addPackModalAC} from "bll/reducers/modal-reducer";
 import {useDispatch} from "react-redux";
 import MyModalPage from "./ModalsPage/MyModalPage";
 import Preloader from "../../common/Preloader/Preloader";

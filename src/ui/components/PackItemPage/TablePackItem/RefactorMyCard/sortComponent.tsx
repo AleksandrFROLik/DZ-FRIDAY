@@ -1,4 +1,4 @@
-import React from 'react';
+import {memo} from 'react';
 import s from "../TablePackItem.module.scss";
 import {sortCardsType} from "bll/reducers/myCard-reducer";
 
@@ -8,10 +8,10 @@ type SortComponentType = {
     handleOnClick: ()=>void,
     down:string,
     app: string,
-    className:string
+    className:string,
 }
 
-const SortComponent = ({sortCards, title, handleOnClick, down,app, className}:SortComponentType) => {
+const SortComponent = memo(({sortCards, title, handleOnClick, down,app, className}:SortComponentType) => {
     return (
         <p className={className} onClick={handleOnClick}>
             {title}
@@ -22,9 +22,8 @@ const SortComponent = ({sortCards, title, handleOnClick, down,app, className}:So
                         ? <span className={s.arrow}>⬆</span>
                         : <span className={s.arrow}>⬇</span>
             }
-
         </p>
     );
-};
+});
 
 export default SortComponent;

@@ -1,8 +1,6 @@
 import {ActionType, DispatchType} from "../action-dispatchTypes";
-import {packsApi} from "../../dal/api/packs-api";
-import {getCardsTC, PackResponseType, setPackPreloaderAC} from "./packs-reducer";
-import {Dispatch} from "redux";
-import {log} from "util";
+import {packsApi} from "dal/api/packs-api";
+import { PackResponseType, setPackPreloaderAC} from "./packs-reducer";
 import {setActiveModalAC} from "./modal-reducer";
 
 

@@ -4,6 +4,7 @@ import {useAppSelector} from "bll/store";
 import {sortCardsType} from "bll/reducers/myCard-reducer";
 import SortComponent from "./RefactorMyCard/sortComponent";
 import {logicFunction} from "./RefactorMyCard/logicFunction";
+import {selectorMyUserId, selectorPackUserId} from "bll/selectors/selectors";
 
 type TablePackItemType = {
     sortCards: sortCardsType,
@@ -11,15 +12,14 @@ type TablePackItemType = {
 }
 
 const TablePackItem = memo(({sortCards, setSortCards}: TablePackItemType) => {
-    console.log('render Table')
-    const packUserId = useAppSelector<string>(state => state.packItem.packUserId)
-    const myUserID = useAppSelector<string>(state => state.auth.user._id)
+    console.log('TablePackItem')
+    const packUserId = useAppSelector(selectorPackUserId)
+    const myUserID = useAppSelector(selectorMyUserId)
 
     const questionSort = () => logicFunction(sortCards, setSortCards, '1question', '0question' )
     const answerSort = () => logicFunction(sortCards, setSortCards, '1answer', '0answer' )
     const updateSort = () => logicFunction(sortCards, setSortCards, '1updated', '0updated' )
     const gradeSort = () => logicFunction(sortCards, setSortCards,  '1grade', '0grade' )
-
 
     return (
         <div className={s.pack}>
@@ -36,4 +36,4 @@ const TablePackItem = memo(({sortCards, setSortCards}: TablePackItemType) => {
         </div>
     )
 })
-export default TablePackItem
+export default TablePackItem;

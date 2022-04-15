@@ -1,15 +1,14 @@
+import {memo} from "react";
 import SuperButton from "../../../../common/c2-SuperButton/SuperButton";
 import s from './AddCard.module.scss'
-import {useInput} from "../../../../../hooks/useInput";
+import {useInput} from "hooks/useInput";
 import SearchInput from "../../../PacksListPage/Search/SearchInput";
-
-
 
 type AddCardPropsType = {
     addNewCard: (question: string, answer: string) => void
 }
 
-const AddCard = ({addNewCard}: AddCardPropsType) => {
+const AddCard = memo(({addNewCard}: AddCardPropsType) => {
 
     const question = useInput('', [])
     const answer = useInput('', [])
@@ -28,6 +27,6 @@ const AddCard = ({addNewCard}: AddCardPropsType) => {
                 <SuperButton onClick={addNewCardOnClick}>Add card</SuperButton>
         </div>
     )
-}
+})
 
 export default AddCard

@@ -38,7 +38,6 @@ export const setAppInitializeAC = (value: boolean) => {
     return {type: 'APP/SET-INITIALIZE', value} as const
 }
 
-
 export const setAppErrorAC = (error: string | null) => {
     return {type: 'APP/SET-ERROR', error} as const
 }

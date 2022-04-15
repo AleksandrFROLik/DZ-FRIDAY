@@ -1,7 +1,7 @@
 import {toggleIsFetchingAC} from "./app-reducer";
 import {ActionType, DispatchType} from "../action-dispatchTypes";
-import {authApi} from "../../dal/api/auth-api";
-import {handleServerAppError} from "../../utils/error-utils";
+import {authApi} from "dal/api/auth-api";
+import {handleServerAppError} from "utils/error-utils";
 
 export type UserType = {
     _id: string;

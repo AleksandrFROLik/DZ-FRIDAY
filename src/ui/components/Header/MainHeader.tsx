@@ -1,7 +1,7 @@
 import {NavLink} from "react-router-dom"
 import s from './Header.module.scss'
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppSelector} from "../../../bll/store";
+import {AppRootStateType, useAppSelector} from "bll/store";
 
 
 const Header = () => {
@@ -20,19 +20,12 @@ const Header = () => {
                     <NavLink children={'Sign Up'} to={'/signup'}
                              className={({isActive}) => (isActive ? s.linkActive : s.link)}/>
                 </section>
-
-
-                {/*<NavLink children={'Forgot pass'} to={'/forgotPass'}*/}
-                {/*         className={({isActive}) => (isActive ? s.linkActive : s.link)}/>*/}
-                {/*<NavLink children={'New pass'} to={'/set-new-password/:token'}*/}
-                {/*         className={({isActive}) => (isActive ? s.linkActive : s.link)}/>*/}
             </header>
         )
     } else {
 
         return (
             <header>
-
                 <section className={s.navlinkContainer}>
                     <NavLink children={'Profile'} to={'/profile'}
                              className={({isActive}) => (isActive ? s.linkActive : s.link)}/>
@@ -41,9 +34,6 @@ const Header = () => {
                     <NavLink children={'Packs list'} to={'/packsList'}
                              className={({isActive}) => (isActive ? s.linkActive : s.link)}/>
                 </section>
-                
-                {/*<NavLink children={'Error'} to={'/error'}*/}
-                {/*         className={({isActive}) => (isActive ? s.linkActive : s.link)}/>*/}
             </header>
         )
     }

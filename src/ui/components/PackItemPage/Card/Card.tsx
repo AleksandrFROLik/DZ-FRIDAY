@@ -1,14 +1,12 @@
 import {FC, memo} from "react";
-
 import s from "../TablePackItem/TablePackItem.module.scss"
 import RefactorMyCard from "../TablePackItem/RefactorMyCard/refactorMyCard";
-
 import {useAppSelector} from "bll/store";
 import { selectorMyUserId } from "bll/selectors/selectors";
 
 
 type CardType = {
-    id: string
+    id: string,
     userId: string,
     question: string
     answer: string
@@ -18,7 +16,7 @@ type CardType = {
 }
 
 const Card: FC<CardType> = memo(({id, userId, question, answer, updated, create, grade}) => {
-    console.log('render Card')
+    console.log("Card")
     const myUserId = useAppSelector(selectorMyUserId)
 
     return (

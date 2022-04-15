@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {setAppErrorAC, setAppInitializeAC, toggleIsFetchingAC} from "./reducers/app-reducer";
+import { setAppErrorAC, setAppInitializeAC, toggleIsFetchingAC} from "./reducers/app-reducer";
 import {
     authMeAC,
     changeProfileAC,
@@ -13,8 +13,10 @@ import {
     changeNumberPageAC,
     getPacksAC,
     searchPackAC,
-    setMaxMinNumberCardsAC, setPackPreloaderAC,
-    setPageCountAC, setWhosePackAC
+    setMaxMinNumberCardsAC,
+    setPackPreloaderAC,
+    setPageCountAC,
+    setWhosePackAC
 } from "./reducers/packs-reducer";
 import {addPacksAC, deletePackAC, updatePackAC} from "./reducers/myPacks-reducer";
 import {

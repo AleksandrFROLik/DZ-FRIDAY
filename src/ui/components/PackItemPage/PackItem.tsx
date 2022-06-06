@@ -1,4 +1,4 @@
-import {memo, useEffect, useLayoutEffect, useState} from 'react';
+import {memo, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
 
@@ -38,7 +38,7 @@ import Preloader from "ui/common/Preloader/Preloader";
 
 
 const PackItem = memo(() => {
-    console.log('render PackItem')
+
     const arrayNumbers = [4, 5, 6, 7, 8, 9, 10]
     const isFetching = useAppSelector(selectorFetching)
     const packItem = useAppSelector(selectorPackItem)
@@ -72,7 +72,6 @@ const PackItem = memo(() => {
     const START_CARDS_COUNT = 4
 
     useEffect(() => {
-        console.log('useEffect')
         dispatch(getPackItemTC(id,
             page,
             pageCount,

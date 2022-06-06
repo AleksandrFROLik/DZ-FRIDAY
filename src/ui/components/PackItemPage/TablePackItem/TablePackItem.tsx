@@ -12,7 +12,6 @@ type TablePackItemType = {
 }
 
 const TablePackItem = memo(({sortCards, setSortCards}: TablePackItemType) => {
-    console.log('TablePackItem')
     const packUserId = useAppSelector(selectorPackUserId)
     const myUserID = useAppSelector(selectorMyUserId)
 

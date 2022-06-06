@@ -16,7 +16,6 @@ type CardType = {
 }
 
 const Card: FC<CardType> = memo(({id, userId, question, answer, updated, create, grade}) => {
-    console.log("Card")
     const myUserId = useAppSelector(selectorMyUserId)
 
     return (

@@ -29,7 +29,6 @@ const LearnPack = () => {
     let [question, setQuestion] = useState<number>(0)
 
     const namePack = cardPacks.find(c => c._id === id && c)
-    console.log(namePack ? namePack.name : '')
 
     useEffect(() => {
         dispatch(getPackItemTC(id))

@@ -10,3 +10,11 @@ export const handleServerAppError = (dispatch: Dispatch<ActionType>, err: any) =
         dispatch(setAppErrorAC('Some error occurred'))
     }
 }
+
+export const handleServerAppError2 = (dispatch: Dispatch<ActionType>, err: any) => {
+    if (err.response.data.error) {
+        dispatch(setAppErrorAC(err.response.data.error))
+    } else {
+        dispatch(setAppErrorAC('Some error occurred'))
+    }
+}
